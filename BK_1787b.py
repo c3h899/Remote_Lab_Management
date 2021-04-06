@@ -49,7 +49,6 @@ class BK_1787b:
 		'SetOutputV'   : 0x23, # Setting the output voltage
 		'StartByte'    : 0xaa, # Start byte
 	}
-	
 	def __init__(self, com, address = 0):
 		self._serial = com
 		self._address = address
@@ -182,8 +181,7 @@ class BK_1787b:
 		cmd[0] = self._COMMANDS['OutputEnable']
 		cmd[1] = 0x01 if enable else 0x00
 		self._send_cmd(cmd)
-	def output_disable(self):
-		self.output_enable(False)
+	def output_disable(self): self.output_enable(False)
 	def remote_control(self, enable = True):
 		# Enables remote control. Must be set prior to use.
 		cmd = bytearray(2)
@@ -212,12 +210,13 @@ class BK_1787b:
 
 if __name__ == "__main__":
 	# EXAMPLE USAGE
-	ser = serial.Serial('COM8')
+	ser = serial.Serial('COM8', timeout=1)
 	PSU = BK_1787b(ser)
+
 	PSU.remote_control()
 	PSU.set_output_voltage(12)
 	PSU.set_output_current(0.2)
 	PSU.output_enable()
+	time.sleep(1)
 	print(PSU.get_status())
-	time.sleep(5)
 	PSU.close()
