@@ -16,7 +16,7 @@ import time
 # LOL NO. If you know what they are for, this implementation should be
 # sufficient to implement them yourself. I have no desire for that functionality.
 
-class BK_1787b:
+class BK_1785b:
 	# Serial Port
 	_serial = None # Serial Object
 	# Serial Configuration
@@ -211,7 +211,7 @@ class BK_1787b:
 if __name__ == "__main__":
 	# EXAMPLE USAGE
 	ser = serial.Serial('COM8', timeout=1)
-	PSU = BK_1787b(ser)
+	PSU = BK_1785b(ser)
 
 	PSU.remote_control()
 	PSU.set_output_voltage(12)
